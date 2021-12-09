@@ -19,7 +19,6 @@ public abstract class Day09 {
         long out = 0;
         int[][] map = generateInput(inStr);
         for (int[] cord : getLowsCords(map)) {
-
             out += map[cord[1]][cord[0]] + 1;
         }
         return out;
@@ -38,23 +37,13 @@ public abstract class Day09 {
 
     private static int flood(int border, int x, int y, int[][] map) {
         int out = 0;
-        if (map[y][x] == border) {
-            return out;
-        } else {
+        if (map[y][x] != border) {
             out++;
             map[y][x] = border;
-            if (x - 1 > -1) {
-                out += flood(border, x - 1, y, map);
-            }
-            if (x + 1 < map[y].length) {
-                out += flood(border, x + 1, y, map);
-            }
-            if (y - 1 > -1) {
-                out += flood(border, x, y - 1, map);
-            }
-            if (y + 1 < map.length) {
-                out += flood(border, x, y + 1, map);
-            }
+            if (x - 1 > -1) out += flood(border, x - 1, y, map);
+            if (x + 1 < map[y].length) out += flood(border, x + 1, y, map);
+            if (y - 1 > -1) out += flood(border, x, y - 1, map);
+            if (y + 1 < map.length) out += flood(border, x, y + 1, map);
         }
         return out;
     }
@@ -74,14 +63,12 @@ public abstract class Day09 {
         return out;
     }
 
-
     private static int[][] generateInput(String inStr) {
         return Arrays
                 .stream(inStr.split("\n"))
                 .map(str -> Arrays
                         .stream(str.split(""))
                         .mapToInt(Integer::parseInt)
-                        .toArray()
-                ).toArray(int[][]::new);
+                        .toArray()).toArray(int[][]::new);
     }
 }
