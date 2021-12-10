@@ -16,9 +16,9 @@ public abstract class InputFetcher {
             String token = Files.readString(Path.of("sessionToken.txt"), StandardCharsets.UTF_8);
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(String.format("https://adventofcode.com/%s/day/%s/input", year, day))).setHeader("Cookie",String.format("session=%s",token))
+                    .uri(URI.create(String.format("https://adventofcode.com/%s/day/%s/input", year, day)))
+                    .setHeader("Cookie", String.format("session=%s", token))
                     .build();
-
             return client.send(request, HttpResponse.BodyHandlers.ofString()).body();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
