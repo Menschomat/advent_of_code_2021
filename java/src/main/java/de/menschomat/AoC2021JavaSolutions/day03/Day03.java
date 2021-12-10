@@ -44,7 +44,6 @@ public abstract class Day03 {
         return filterForGasLeve("oxygen", inStr) * filterForGasLeve("co2", inStr);
     }
 
-
     private static long filterForGasLeve(String gas, String inStr) {
         List<int[]> input = Arrays.asList(prepareInput(inStr));
         for (int i = 0; i < input.get(0).length; i++) {
@@ -53,8 +52,8 @@ public abstract class Day03 {
                 if (ints[i] == 0) zero += 1;
                 else one += 1;
             }
-            int checker = gas.equals("oxygen") ? (one >= zero ? 1 : 0) : (zero <= one ? 0 : 1);
-            int finalI = i;
+            final int checker = gas.equals("oxygen") ? (one >= zero ? 1 : 0) : (zero <= one ? 0 : 1);
+            final int finalI = i;
             input = input.stream().filter(arr -> arr[finalI] == checker).collect(Collectors.toList());
             if (input.size() == 1) break;
         }
@@ -71,6 +70,4 @@ public abstract class Day03 {
                         .mapToInt(Integer::parseInt)
                         .toArray()).toArray(int[][]::new);
     }
-
-
 }
