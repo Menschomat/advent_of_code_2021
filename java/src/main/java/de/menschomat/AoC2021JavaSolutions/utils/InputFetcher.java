@@ -13,7 +13,7 @@ public abstract class InputFetcher {
 
     public static String getInput(int year, int day) {
         try {
-            String token = Files.readString(Path.of("sessionToke.txt"), StandardCharsets.UTF_8);
+            String token = Files.readString(Path.of("sessionToken.txt"), StandardCharsets.UTF_8);
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(String.format("https://adventofcode.com/%s/day/%s/input", year, day))).setHeader("Cookie",String.format("session=%s",token))
